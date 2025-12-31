@@ -1,0 +1,79 @@
+# AI Wealth Advisor Simulator (Beginner Python Project)
+
+This project is a beginner-friendly Python program that simulates how a wealth advisor might recommend an investment portfolio based on a client's time horizon and risk tolerance.
+
+I built this project as a Business Finance major interested in wealth management and fintech, with the goal of learning how financial decision-making logic can be translated into code and later enhanced with AI.
+
+---
+
+## What the Program Does
+
+- Asks the user for:
+  - Investment time horizon (in years)
+  - Risk tolerance (1–10)
+- Generates a portfolio allocation:
+  - Stocks
+  - Bonds
+  - Cash
+- Provides a plain-English explanation for why the portfolio was recommended
+
+This project focuses on **explainability**, which is especially important in wealth management.
+
+---
+
+## Full Python Code
+
+```python
+print("Welcome to the AI Wealth Advisor Simulator!")
+
+time_horizon = int(input("How many years will you invest for? (example: 10) "))
+risk = int(input("Risk tolerance from 1 to 10? (1 = very safe, 10 = very aggressive) "))
+
+stocks = 0
+bonds = 0
+cash = 0
+
+if time_horizon <= 3:
+    stocks = 20
+    bonds = 50
+    cash = 30
+elif time_horizon <= 7:
+    if risk <= 4:
+        stocks = 40
+        bonds = 50
+        cash = 10
+    else:
+        stocks = 55
+        bonds = 40
+        cash = 5
+else:
+    if risk <= 4:
+        stocks = 55
+        bonds = 40
+        cash = 5
+    elif risk <= 7:
+        stocks = 70
+        bonds = 25
+        cash = 5
+    else:
+        stocks = 85
+        bonds = 10
+        cash = 5
+
+print("\n--- Recommended Portfolio ---")
+print("Stocks:", stocks, "%")
+print("Bonds :", bonds, "%")
+print("Cash  :", cash, "%")
+
+print("\n--- Explanation ---")
+if time_horizon <= 3:
+    print("Because your time horizon is short, this portfolio is more conservative.")
+else:
+    print("Because you have more time, you can take more risk for growth.")
+
+if risk <= 4:
+    print("Your risk score is lower, so we added more bonds for stability.")
+elif risk <= 7:
+    print("Your risk score is moderate, so this portfolio balances growth and safety.")
+else:
+    print("Your risk score is high, so we increased stocks to focus on growth.")
