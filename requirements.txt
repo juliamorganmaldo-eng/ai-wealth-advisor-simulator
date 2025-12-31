@@ -1,0 +1,2 @@
+cd ~/Documents/ai_wealth_advisor
+pip3 freeze > requirements.txt
