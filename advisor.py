@@ -1,43 +1,44 @@
 print("Welcome to the AI Wealth Advisor Simulator!")
 
-time_horizon = int(input("How many years will you invest for? (example: 10) "))
-risk = int(input("Risk tolerance from 1 to 10? (1 = very safe, 10 = very aggressive) "))
+def get_int(prompt, min_value=None, max_value=None):
+    while True:
+        user_input = input(prompt)
+        try:
+            value = int(user_input)
+            if min_value is not None and value < min_value:
+                print(f"Please enter a number >= {min_value}.")
+                continue
+            if max_value is not None and value > max_value:
+                print(f"Please enter a number <= {max_value}.")
+                continue
+            return value
+        except ValueError:
+            print("Please enter a whole number (example: 10).")
 
-stocks = 0
-bonds = 0
-cash = 0
+time_horizon = get_int("How many years will you invest for? (example: 10) ", min_value=1, max_value=60)
+risk = get_int("Risk tolerance from 1 to 10? (1 = very safe, 10 = very aggressive) ", min_value=1, max_value=10)
+
+stocks = bonds = cash = 0
 
 if time_horizon <= 3:
-    stocks = 20
-    bonds = 50
-    cash = 30
+    stocks, bonds, cash = 20, 50, 30
 elif time_horizon <= 7:
     if risk <= 4:
-        stocks = 40
-        bonds = 50
-        cash = 10
+        stocks, bonds, cash = 40, 50, 10
     else:
-        stocks = 55
-        bonds = 40
-        cash = 5
+        stocks, bonds, cash = 55, 40, 5
 else:
     if risk <= 4:
-        stocks = 55
-        bonds = 40
-        cash = 5
+        stocks, bonds, cash = 55, 40, 5
     elif risk <= 7:
-        stocks = 70
-        bonds = 25
-        cash = 5
+        stocks, bonds, cash = 70, 25, 5
     else:
-        stocks = 85
-        bonds = 10
-        cash = 5
+        stocks, bonds, cash = 85, 10, 5
 
 print("\n--- Recommended Portfolio ---")
-print("Stocks:", stocks, "%")
-print("Bonds :", bonds, "%")
-print("Cash  :", cash, "%")
+print(f"Stocks: {stocks}%")
+print(f"Bonds : {bonds}%")
+print(f"Cash  : {cash}%")
 
 print("\n--- Explanation ---")
 if time_horizon <= 3:
@@ -51,4 +52,6 @@ elif risk <= 7:
     print("Your risk score is moderate, so this portfolio balances growth and safety.")
 else:
     print("Your risk score is high, so we increased stocks to focus on growth.")
+
+print("\nNote: This is an educational simulator, not financial advice.")
 
